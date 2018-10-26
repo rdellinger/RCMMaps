@@ -1,0 +1,70 @@
+﻿@model RCMMaps.Models.UserSearch
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Delete this UserSearch?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapsSearchString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapsSearchString)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BoardsSearchString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoardsSearchString)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BoardType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoardType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendor)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+        </div>
+    }
+</div>

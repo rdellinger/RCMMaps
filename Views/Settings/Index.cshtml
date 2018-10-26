@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Settings";
+}
+
+<div class="jumbotron">
+    <h1>Settings</h1>
+    <p class="lead">Use these forms to manage the site options and defaults.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Settings</h2>
+        <p>
+            @Html.ActionLink("Board Ratings", "Index", "BoardRatings") <br />
+            @Html.ActionLink("Board Types", "Index", "BoardTypes") <br />
+            @Html.ActionLink("Board Vendors", "Index", "BoardVendors") <br />
+            @Html.ActionLink("DMAs", "Index", "DMAs") <br />
+            @Html.ActionLink("Map Defaults", "Edit", "MapDefaults", null, null, null, new { id = 1 }, null) <br />
+            @Html.ActionLink("Map Style Defaults", "Index", "MapStyleDefaults") <br />
+            @Html.ActionLink("Pin Types", "Index", "PinTypes") <br />
+            @Html.ActionLink("Production Vendors", "Index", "ProductionVendors") <br />
+        </p>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<RCMMaps.Models.BoardRating>
+
+@{
+    ViewBag.Title = "Board Ratings";
+}
+
+<h2>Board Ratings</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-success btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th style="width: 150px;">
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td width="70px">
+                <a href="@Url.Action("Edit", "BoardRatings", new { id = item.ID })" class="btn btn-info btn-xs">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a href="@Url.Action("Delete", "BoardRatings", new { id = item.ID })" class="btn btn-danger btn-xs">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

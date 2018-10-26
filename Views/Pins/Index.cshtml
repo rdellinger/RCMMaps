@@ -1,0 +1,70 @@
+﻿@model IEnumerable<RCMMaps.Models.Pin>
+
+@{
+    ViewBag.Title = "Pins";
+}
+
+<h2>Pin</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Map.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PinType.Title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+			<a href="@Url.Action("Details", "Pins", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Title)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "Pins", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Latitude)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "Pins", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Longitude)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "Pins", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Map.Title)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "Pins", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.PinType.Title)
+			</a>
+        </td>
+        <td width="70px">
+			<a href="@Url.Action("Edit", "Pins", new { id = item.ID })" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a href="@Url.Action("Delete", "Pins", new { id = item.ID })" class="btn btn-danger btn-xs">
+				<span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

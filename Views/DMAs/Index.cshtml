@@ -1,0 +1,37 @@
+﻿@model IEnumerable<RCMMaps.Models.DMA>
+
+@{
+    ViewBag.Title = "DMAs";
+}
+
+<h2>DMAs</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-success btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DMA1)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DMA1)
+            </td>
+            <td width="70px">
+                <a href="@Url.Action("Edit", "DMAs", new { id = item.ID })" class="btn btn-info btn-xs">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a href="@Url.Action("Delete", "DMAs", new { id = item.ID })" class="btn btn-danger btn-xs">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

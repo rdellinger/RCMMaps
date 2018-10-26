@@ -1,0 +1,66 @@
+﻿@model IEnumerable<RCMMaps.Models.MapStyleDefault>
+
+@{
+    ViewBag.Title = "Map Style Defaults";
+}
+
+<h2>Map Style Defaults</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-success btn-sm" })
+</p>
+
+<p>
+    NOTE:  Any feature without a default style will use the default Google Maps style instead.
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureType.FeatureType1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Saturation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lightness)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gamma)
+        </th>  
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeatureType.FeatureType1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Saturation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lightness)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gamma)
+            </td>
+            <td width="70px">
+                <a href="@Url.Action("Edit", "MapStyleDefaults", new { id = item.ID })" class="btn btn-info btn-xs">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a href="@Url.Action("Delete", "MapStyleDefaults", new { id = item.ID })" class="btn btn-danger btn-xs">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,48 @@
+﻿@model RCMMaps.Models.Map_Boards
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Map_Boards</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MapID, "MapID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MapID", String.Empty)
+                @Html.ValidationMessageFor(model => model.MapID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BoardID, "BoardID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BoardID", String.Empty)
+                @Html.ValidationMessageFor(model => model.BoardID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,62 @@
+﻿@model RCMMaps.Models.MapStyleDefault
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Delete this Map Style Default?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Hue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saturation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saturation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lightness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lightness)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gamma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gamma)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FeatureType.FeatureType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeatureType.FeatureType1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+        </div>
+    }
+</div>

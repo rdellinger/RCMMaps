@@ -1,0 +1,38 @@
+﻿@model RCMMaps.Models.Map_Boards
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Delete this Map_Boards?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Board.BoardNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Board.BoardNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Map.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Map.Title)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+        </div>
+    }
+</div>

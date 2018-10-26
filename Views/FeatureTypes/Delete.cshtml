@@ -1,0 +1,38 @@
+﻿@model RCMMaps.Models.FeatureType
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Delete this Map Feature Type?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FeatureType1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FeatureType1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+        </div>
+    }
+</div>

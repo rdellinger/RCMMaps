@@ -1,0 +1,43 @@
+﻿@model IEnumerable<RCMMaps.Models.FeatureType>
+
+@{
+    ViewBag.Title = "Map Feature Types";
+}
+
+<h2>Map Feature Types</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "", new { @class = "btn btn-success btn-sm" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FeatureType1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeatureType1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td width="70px">
+                <a href="@Url.Action("Edit", "FeatureTypes", new { id = item.ID })" class="btn btn-info btn-xs">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a href="@Url.Action("Delete", "FeatureTypes", new { id = item.ID })" class="btn btn-danger btn-xs">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

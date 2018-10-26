@@ -1,0 +1,339 @@
+﻿@model RCMMaps.Models.Board
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+<h4>@Model.Description</h4>
+
+@* --- Nav tabs --- *@
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+    <li><a href="#images" data-toggle="tab">Images</a></li>
+</ul>
+
+
+@* --- Content --- *@
+<div class="tab-content">
+
+    @* --- Details --- *@
+    <div class="tab-pane active" id="details">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <br /><br />
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BoardNumber, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BoardNumber)
+                        @Html.ValidationMessageFor(model => model.BoardNumber)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BoardTypeID, "Board Type", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BoardTypeID", "-- Select --") &nbsp; @Html.ActionLink("Edit Options", "Index", "BoardTypes")
+                        @Html.ValidationMessageFor(model => model.BoardTypeID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BoardVendorID, "Board Vendor", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BoardVendorID", "-- Select --") &nbsp; @Html.ActionLink("Edit Options", "Index", "BoardVendors")
+                        @Html.ValidationMessageFor(model => model.BoardVendorID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DMAID, "DMA", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("DMAID", "-- Select --") &nbsp; @Html.ActionLink("Edit Options", "Index", "DMAs")
+                        @Html.ValidationMessageFor(model => model.DMAID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProductionVendorID, "Production Vendor", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ProductionVendorID", "-- Select --") &nbsp; @Html.ActionLink("Edit Options", "Index", "ProductionVendors")
+                        @Html.ValidationMessageFor(model => model.ProductionVendorID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "mediumtextarea" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Address, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.Address)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.City, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.City, new { @class = "mediumtextbox" })
+                        @Html.ValidationMessageFor(model => model.City)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Zip, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Zip)
+                        @Html.ValidationMessageFor(model => model.Zip)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Latitude)
+                        @Html.ValidationMessageFor(model => model.Latitude)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Longitude)
+                        @Html.ValidationMessageFor(model => model.Longitude)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Facing, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Facing)
+                        @Html.ValidationMessageFor(model => model.Facing)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SideOfStreet, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.SideOfStreet)
+                        @Html.ValidationMessageFor(model => model.SideOfStreet)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReadDirection, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ReadDirection)
+                        @Html.ValidationMessageFor(model => model.ReadDirection)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Illuminated, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top: 7px;">
+                        @Html.CheckBoxFor(model => model.Illuminated)
+                        @Html.ValidationMessageFor(model => model.Illuminated)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BoardHeight, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BoardHeight)
+                        @Html.ValidationMessageFor(model => model.BoardHeight)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BoardWidth, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BoardWidth)
+                        @Html.ValidationMessageFor(model => model.BoardWidth)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Weekly18PlusImpressions, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Weekly18PlusImpressions)
+                        @Html.ValidationMessageFor(model => model.Weekly18PlusImpressions)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TabPanelID, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TabPanelID)
+                        @Html.ValidationMessageFor(model => model.TabPanelID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LinkToProductionSpecs, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.LinkToProductionSpecs, new { @class = "mediumtextbox" })
+                        @Html.ValidationMessageFor(model => model.LinkToProductionSpecs)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BoardRatingID, "Board Rating", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BoardRatingID", "-- Select --") &nbsp; @Html.ActionLink("Edit Options", "Index", "BoardRatings")
+                        @Html.ValidationMessageFor(model => model.BoardRatingID)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Notes, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Notes, new { @class = "mediumtextarea" })
+                        @Html.ValidationMessageFor(model => model.Notes)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Tags, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Tags, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.Tags)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateCreated, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top:7px;">
+                        @Html.DisplayFor(model => model.DateCreated)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreatedBy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top:7px;">
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateModified, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top:7px;">
+                        @Html.DisplayFor(model => model.DateModified)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ModifiedBy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top:7px;">
+                        @Html.DisplayFor(model => model.ModifiedBy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+
+
+
+    @* --- Images --- *@
+    <div class="tab-pane" id="images">
+        <br /><br />
+
+        <a href="@Url.Action("Create", "BoardImages", new { boardId = Model.ID })" class="btn btn-warning btn-sm">
+            <span class="glyphicon glyphicon-upload"></span>&nbsp;&nbsp;Upload New Image
+        </a>
+
+        <br /><br />
+
+        @*If there are any results, then show them*@
+        @if (Model.BoardImages.Count() > 0)
+        {
+
+            <table class="table">
+
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.BoardImages.OrderBy(s => s.DisplayOrder))
+                {
+                    <tr>
+                        <td width="250">
+                            <a href="~/Images/Boards/@Html.DisplayFor(modelItem => item.Image)">
+                                <img src="~/Images/Boards/@Html.DisplayFor(modelItem => item.Image)" width="150" />
+                            </a>
+                        </td>
+                        <td width="50%">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImageDate)
+                        </td>
+                        <td style="text-align:right;">
+
+                            <a href="@Url.Action("Edit", "BoardImages", new { id = item.ID, boardId = item.BoardID })" class="btn btn-info btn-xs">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a href="@Url.Action("Delete", "BoardImages", new { id = item.ID, boardId = item.BoardID })" class="btn btn-danger btn-xs">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+
+        else
+        {
+            <div>There are no images for this board.</div>
+        }
+    </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/RCMMaps")
+}

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<RCMMaps.Models.UserSearch>
+
+@{
+    ViewBag.Title = "UserSearches";
+}
+
+<h2>UserSearch</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MapsSearchString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BoardsSearchString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BoardType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DMA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+			<a href="@Url.Action("Details", "UserSearches", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Username)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "UserSearches", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.MapsSearchString)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "UserSearches", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.BoardsSearchString)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "UserSearches", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.BoardType)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "UserSearches", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.DMA)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "UserSearches", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Vendor)
+			</a>
+        </td>
+        <td width="70px">
+			<a href="@Url.Action("Edit", "UserSearches", new { id = item.ID })" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a href="@Url.Action("Delete", "UserSearches", new { id = item.ID })" class="btn btn-danger btn-xs">
+				<span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

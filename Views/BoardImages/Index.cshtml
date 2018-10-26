@@ -1,0 +1,70 @@
+﻿@model IEnumerable<RCMMaps.Models.BoardImage>
+
+@{
+    ViewBag.Title = "Board Images";
+}
+
+<h2>BoardImage</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Board.BoardNumber)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+			<a href="@Url.Action("Details", "BoardImages", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Title)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "BoardImages", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Image)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "BoardImages", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.ImageDate)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "BoardImages", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.DisplayOrder)
+			</a>
+        </td>
+        <td>
+			<a href="@Url.Action("Details", "BoardImages", new { id = item.ID })">
+				@Html.DisplayFor(modelItem => item.Board.BoardNumber)
+			</a>
+        </td>
+        <td width="70px">
+			<a href="@Url.Action("Edit", "BoardImages", new { id = item.ID })" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>
+            </a>
+            <a href="@Url.Action("Delete", "BoardImages", new { id = item.ID })" class="btn btn-danger btn-xs">
+				<span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

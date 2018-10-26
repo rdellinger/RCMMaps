@@ -1,0 +1,158 @@
+﻿@model RCMMaps.Models.Map
+
+@{
+    ViewBag.Title = "Map";
+}
+
+@**************************************** Google Map *****************************************************@
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCqvdXgRAMjlxa560CbLQclcLuy8zr0b28"></script>
+
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+<!-- This css is to create a popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 100px;
+        width: 200px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    // Where all the fun happens
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        google.maps.visualRefresh = true;
+        var thisMap = new google.maps.LatLng(@Model.CenterOnLat, @Model.CenterOnLong);
+
+        var styles = [
+
+        @foreach (var item in ViewBag.allStyles)
+        {
+            @:{"featureType": "@item.FeatureType.Code", "stylers": [{"hue": "@item.Hue"},{"saturation": @item.Saturation},{"lightness": @item.Lightness},{"gamma": @item.Gamma}]},
+        }
+        ];
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: @Model.ZoomLevel,
+            center: thisMap,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoomControl : @Model.DisplayZoomControl.ToString().ToLower(),
+            mapTypeControl : @Model.DisplayMapTypeControl.ToString().ToLower(),
+            scaleControl : @Model.DisplayScaleControl.ToString().ToLower(),
+            streetViewControl : @Model.DisplayStreetViewControl.ToString().ToLower(),
+            panControl : @Model.DisplayPanControl.ToString().ToLower(),
+            styles: styles
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        // Create JSON data to display the nearby vessels
+        var data = [
+
+             @foreach (var item in ViewBag.allBoards)
+             {
+                 if (item.Board.Latitude != null && item.Board.Longitude != null)
+                 {
+
+                     var boardId = item.BoardID;
+                     var boardNumber = "";
+                     var description = "";
+                     var geoLat = item.Board.Latitude;
+                     var geoLong = item.Board.Longitude;
+
+                     if (item.Board.BoardNumber != null)
+                     {
+                         boardNumber = item.Board.BoardNumber;
+                     }
+                     else
+                     {
+                         boardNumber = "";
+                     }
+
+                     if (item.Board.Description != null)
+                     {
+                         description = item.Board.Description;
+                     }
+                     else
+                     {
+                         description = "";
+                     }
+
+
+                     @Html.Raw("{'Id': '" + boardId + "', 'boardNumber': '" + boardNumber + "', 'description': '" + description + "', 'GeoLat': '" + geoLat + "', 'GeoLong': '" + geoLong + "'},");
+
+                }
+
+             }
+        ];
+
+
+        // Create pins for the boards
+        $.each(data, function (i, item) {
+            var marker = new google.maps.Marker({
+                'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                'map': map,
+                'title': item.boardNumber,
+                'draggable': true
+            });
+
+            // Make the pins for nearby vessels all a different color than the selected vessel
+            marker.setIcon('../../Images/Icons/east-darkblue3.png')
+
+            // Display some information about each vessel in the popup window
+            var infowindow = new google.maps.InfoWindow({
+                content: "<div class='infoDiv'><span style='font-size: 18px; font-weight: bold;'>" + item.boardNumber + "</span><br />" + item.description + "<br />" + "<a href='../../Boards/Edit/" + item.Id + "'>Learn more...</a>" + "</div>"
+            });
+
+            // Hook up an "OnClick" listener to the map to create the popup window when the pin is clicked
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+
+        });
+    }
+</script>
+
+@**************************************** End Google Map *****************************************************@
+
+
+
+<h2>Map</h2>
+
+<div>
+    <h4>@Model.Title</h4>
+    <hr />
+
+    @*Map*@
+    @*If there are any results, then show them*@
+    @if (Model.CenterOnLong != null)
+    {
+        <div id="map_canvas" style="height: @(Model.Height + "px"); width: @(Model.Width + "px");">
+        </div>
+    }
+
+
+
+</div>
+<p>
+    <br /><br />
+    @Html.ActionLink("Back to Maps", "Index", "Maps", null, null, null, new { SearchString = Request.QueryString["SearchString"] }, null)
+</p>

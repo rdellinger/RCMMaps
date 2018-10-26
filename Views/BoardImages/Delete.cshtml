@@ -1,0 +1,50 @@
+﻿@model RCMMaps.Models.BoardImage
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Delete this Board Image?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            <img src="~/Images/Boards/@Html.DisplayFor(model => model.Image)" width="150" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />&nbsp; |
+
+            @Html.ActionLink("Cancel", "Edit", "Boards", null, null, "images", new { id = Request.QueryString["boardId"] }, null)
+        </div>
+    }
+</div>

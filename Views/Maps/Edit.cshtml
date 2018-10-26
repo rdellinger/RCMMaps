@@ -1,0 +1,648 @@
+﻿@model RCMMaps.Models.Map
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@**************************************** Google Map *****************************************************@
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCqvdXgRAMjlxa560CbLQclcLuy8zr0b28"></script>
+
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+<!-- This css is to create a popup "info window" when a marker is clicked on the map -->
+<style>
+    .infoDiv {
+        height: 100px;
+        width: 200px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    // Where all the fun happens
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        google.maps.visualRefresh = true;
+        var thisMap = new google.maps.LatLng(@Model.CenterOnLat, @Model.CenterOnLong);
+
+        var styles = [
+
+        @foreach (var item in ViewBag.allStyles)
+        {
+            @:{"featureType": "@item.FeatureType.Code", "stylers": [{"hue": "@item.Hue"},{"saturation": @item.Saturation},{"lightness": @item.Lightness},{"gamma": @item.Gamma}]},
+        }
+        ];
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: @Model.ZoomLevel,
+            center: thisMap,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoomControl : @Model.DisplayZoomControl.ToString().ToLower(),
+            mapTypeControl : @Model.DisplayMapTypeControl.ToString().ToLower(),
+            scaleControl : @Model.DisplayScaleControl.ToString().ToLower(),
+            streetViewControl : @Model.DisplayStreetViewControl.ToString().ToLower(),
+            panControl : @Model.DisplayPanControl.ToString().ToLower(),
+            styles: styles
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        // Create JSON data to display the boards and pins
+        var boardData = [
+
+            // First, get the boards
+             @foreach (var item in ViewBag.allBoards)
+             {
+                 if (item.Board.Latitude != null && item.Board.Longitude != null)
+                 {
+
+                     var boardId = item.BoardID;
+                     var boardNumber = "";
+                     var description = "";
+                     var geoLat = item.Board.Latitude;
+                     var geoLong = item.Board.Longitude;
+                     var pinType = item.PinType.Image;
+
+                     if (item.Board.BoardNumber != null)
+                     {
+                         boardNumber = item.Board.BoardNumber;
+                     }
+                     else
+                     {
+                         boardNumber = "";
+                     }
+
+                     if (item.Board.Description != null)
+                     {
+                         description = item.Board.Description;
+                     }
+                     else
+                     {
+                         description = "";
+                     }
+
+
+                     @Html.Raw("{'Id': '" + boardId + "', 'boardNumber': '" + boardNumber + "', 'description': '" + description + "', 'GeoLat': '" + geoLat + "', 'GeoLong': '" + geoLong + "', 'pinType': '" + pinType + "'},");
+
+                }
+
+             }
+        ];
+
+
+
+        // Next, get the pins
+        var pinData = [
+
+             @foreach (var item in ViewBag.allPins)
+        {
+            if (item.Latitude != null && item.Longitude != null)
+            {
+
+                var pinId = item.ID;
+                var title = "";
+                var geoLat = item.Latitude;
+                var geoLong = item.Longitude;
+                var pinType = item.PinType.Image;
+
+                if (item.Title != null)
+                {
+                    title = item.Title;
+                }
+                else
+                {
+                    title = "";
+                }
+
+
+                @Html.Raw("{'Id': '" + pinId + "', 'title': '" + title + "', 'GeoLat': '" + geoLat + "', 'GeoLong': '" + geoLong + "', 'pinType': '" + pinType + "'},");
+
+            }
+
+        }
+
+
+
+        ];
+
+
+
+
+
+        // Create map pins for the Boards
+        $.each(boardData, function (i, item) {
+            var marker = new google.maps.Marker({
+                'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                'map': map,
+                'title': item.boardNumber,
+                'draggable': true
+            });
+
+            // Make the pins for nearby vessels all a different color than the selected vessel
+            marker.setIcon('../../Images/Icons/' + item.pinType)
+
+            // Display some information about each vessel in the popup window
+            var infowindow = new google.maps.InfoWindow({
+                content: "<div class='infoDiv'><span style='font-size: 18px; font-weight: bold;'>" + item.boardNumber + "</span><br />" + item.description + "<br /><br />" + "<a href='../../Boards/Edit/" + item.Id + "'>Edit Board</a>" + "<br />" + "<a href='../../Boards/Edit/" + item.Id + "#images'>View Images</a>" + "</div>"
+            });
+
+            // Hook up an "OnClick" listener to the map to create the popup window when the pin is clicked
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+
+        });
+
+
+
+        // Create map pins for the Pins
+        $.each(pinData, function (i, item) {
+            var marker = new google.maps.Marker({
+                'position': new google.maps.LatLng(item.GeoLat, item.GeoLong),
+                'map': map,
+                'title': item.title,
+                'draggable': true
+            });
+
+            // Make the pins for nearby vessels all a different color than the selected vessel
+            marker.setIcon('../../Images/Icons/' + item.pinType)
+
+            // Display some information about each vessel in the popup window
+            var infowindow = new google.maps.InfoWindow({
+                content: "<div class='infoDiv'><span style='font-size: 18px; font-weight: bold;'>" + item.title + "</span><br /><br />" + "<a href='../../Pins/Edit/" + item.Id + "'>Edit Pin</a>" + "</div>"
+            });
+
+            // Hook up an "OnClick" listener to the map to create the popup window when the pin is clicked
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+
+        });
+
+
+    }
+</script>
+
+@**************************************** End Google Map *****************************************************@
+
+
+
+
+
+
+<h2>Edit</h2>
+<h4>@Model.Title</h4>
+
+
+@* --- Nav tabs --- *@
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#map" data-toggle="tab">Map</a></li>
+    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+    <li><a href="#appearance" data-toggle="tab">Appearance</a></li>
+    <li><a href="#boards" data-toggle="tab">Boards</a></li>
+    <li><a href="#pins" data-toggle="tab">Pins</a></li>
+</ul>
+
+
+
+@* --- Content --- *@
+<div class="tab-content">
+
+
+
+
+    @* --- Map --- *@
+    <div class="tab-pane active" id="map" style="margin-top: 40px;">
+
+        @*Map*@
+        @*If there are any results, then show them*@
+        @if (Model.CenterOnLong != null)
+        {
+            <div id="map_canvas" style="height: @(Model.Height + "px"); width: @(Model.Width + "px" );">
+            </div>
+        }
+
+
+        <p>
+            <br /><br />
+            @Html.ActionLink("< Back to List", "Index")
+        </p>
+
+    </div>
+
+
+
+
+
+    @* --- Settings --- *@
+    <div class="tab-pane" id="settings">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <br /><br />
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.ID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Title, new { @class = "mediumtextbox" })
+                        @Html.ValidationMessageFor(model => model.Title)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "mediumtextarea" })
+                        @Html.ValidationMessageFor(model => model.Description)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Width, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Width)
+                        @Html.ValidationMessageFor(model => model.Width)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Height, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Height)
+                        @Html.ValidationMessageFor(model => model.Height)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="control-label col-md-2" style="font-weight: bold;">Center Map At</span>
+
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CenterOnLat, new { @class = "form-control", placeholder = "Latitude" })
+                        @Html.ValidationMessageFor(model => model.CenterOnLat)
+                        @Html.EditorFor(model => model.CenterOnLong, new { @class = "form-control", placeholder = "Longitude" })
+                        @Html.ValidationMessageFor(model => model.CenterOnLong)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ZoomLevel, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ZoomLevel)
+                        @Html.ValidationMessageFor(model => model.ZoomLevel)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayZoomControl, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top: 7px;">
+                        @Html.EditorFor(model => model.DisplayZoomControl)
+                        @Html.ValidationMessageFor(model => model.DisplayZoomControl)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayMapTypeControl, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top: 7px;">
+                        @Html.EditorFor(model => model.DisplayMapTypeControl)
+                        @Html.ValidationMessageFor(model => model.DisplayMapTypeControl)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayScaleControl, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top: 7px;">
+                        @Html.EditorFor(model => model.DisplayScaleControl)
+                        @Html.ValidationMessageFor(model => model.DisplayScaleControl)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayStreetViewControl, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top: 7px;">
+                        @Html.EditorFor(model => model.DisplayStreetViewControl)
+                        @Html.ValidationMessageFor(model => model.DisplayStreetViewControl)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DisplayPanControl, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top: 7px;">
+                        @Html.EditorFor(model => model.DisplayPanControl)
+                        @Html.ValidationMessageFor(model => model.DisplayPanControl)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Tags, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Tags, new { @class = "smalltextarea" })
+                        @Html.ValidationMessageFor(model => model.Tags)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateCreated, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top:7px;">
+                        @Html.DisplayFor(model => model.DateCreated)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreatedBy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top:7px;">
+                        @Html.DisplayFor(model => model.CreatedBy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateModified, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top:7px;">
+                        @Html.DisplayFor(model => model.DateModified)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ModifiedBy, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="margin-top:7px;">
+                        @Html.DisplayFor(model => model.ModifiedBy)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+
+    @* --- Appearance --- *@
+    <div class="tab-pane" id="appearance">
+
+        <br /><br />
+
+        @Html.ActionLink(
+        linkText: "Add Map Style",
+        actionName: "Create",
+        controllerName: "MapStyles",
+        routeValues: new
+        {
+            MapId = Model.ID
+        },
+        htmlAttributes: null
+        )
+        <br /><br />
+
+        @*If there are any Map Styles, then show them*@
+        @if (Model.MapStyles.Count() > 0)
+        {
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Feature
+                    </th>
+                    <th>
+                        Hue
+                    </th>
+                    <th>
+                        Saturation
+                    </th>
+                    <th>
+                        Lightness
+                    </th>
+                    <th>
+                        Gamma
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.MapStyles)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FeatureType.FeatureType1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Hue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Saturation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lightness)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gamma)
+                        </td>
+
+                        <td width="70px">
+                            <a href="@Url.Action("Edit", "MapStyles" , new { id=item.ID })" class="btn btn-info btn-xs">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a href="@Url.Action("Delete", "MapStyles" , new { id=item.ID })" class="btn btn-danger btn-xs">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        }
+
+        else
+        {
+            <div>This map is using the default Google Maps styles.</div>
+        }
+
+    </div>
+
+
+
+
+
+    @* --- Boards --- *@
+    <div class="tab-pane" id="boards">
+        <br /><br />
+
+        @Html.ActionLink(
+        linkText: "Add Board to Map",
+        actionName: "Index",
+        controllerName: "Map_Boards",
+        routeValues: new
+        {
+            MapId = Model.ID
+        },
+        htmlAttributes: null
+        )
+        <br /><br />
+
+        @*If there are any boards, then show them*@
+        @if (Model.Map_Boards.Count() > 0)
+        {
+
+            <table class="table">
+
+                <tr>
+                    <th style="width: 100px;">
+                        Board #
+                    </th>
+                    <th style="width: 150px;">
+                        Board Type
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th style="width: 180px; text-align: center;">
+                        Pin Type
+                    </th>
+                    <th style="width: 100px; text-align: center;">
+                        Add/Remove
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.Map_Boards)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Board.BoardNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Board.BoardType.BoardType1)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Board.Description)
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="@Url.Action("SelectPinType", "Map_Boards", new { id = item.ID, mapId = item.MapID, boardId = item.BoardID })">
+                                <img src="~/Images/icons/@Html.DisplayFor(modelItem => item.PinType.Image)" />
+                            </a>
+                        </td>
+                        <td align="center">
+                            <a href="@Url.Action("RemoveFromMap", "Map_Boards", new { id = item.ID, redirectTo = "Map" })" class="btn btn-danger btn-xs">
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+
+        else
+        {
+            <div>There are no boards for this map.</div>
+        }
+    </div>
+
+
+
+
+    @* --- Pins --- *@
+    <div class="tab-pane" id="pins">
+        <br /><br />
+
+        @Html.ActionLink(
+        linkText: "Add Pin to Map",
+        actionName: "Create",
+        controllerName: "Pins",
+        routeValues: new
+        {
+            MapId = Model.ID
+        },
+        htmlAttributes: null
+        )
+        <br /><br />
+
+        @*If there are any pins, then show them*@
+        @if (Model.Pins.Count() > 0)
+        {
+
+            <table class="table">
+
+                <tr>
+                    <th style="width: 600px;">
+                        Title
+                    </th>
+                    <th style="width: 120px; text-align: center;">
+                        Pin Type
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Pins)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="@Url.Action("Edit", "Pins" , new { id=item.ID, mapid=item.MapID })">
+                                <img src="~/Images/icons/@Html.DisplayFor(modelItem => item.PinType.Image)" />
+                            </a>
+                        </td>
+                        <td width="70px">
+                            <a href="@Url.Action("Edit", "Pins" , new { id=item.ID, mapid=item.MapID })" class="btn btn-info btn-xs">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a href="@Url.Action("Delete", "Pins" , new { id=item.ID, mapid=item.MapID })" class="btn btn-danger btn-xs">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+
+        else
+        {
+            <div>There are no pins for this map.</div>
+        }
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/RCMMaps")
+}

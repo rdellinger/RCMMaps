@@ -1,0 +1,251 @@
+body,html{
+    margin: 0px auto;
+    height: 100%;
+    background: #C53038;
+}
+.accordionContent{
+	font-family: "museo-sans-1","museo-sans-2", sans-serif;
+	font-size: 17px;
+	line-height: 28px;
+	color: #333333;
+}
+
+.footer{
+
+}
+
+.red{
+    color: #C53038;
+    font-weight: bold;
+}
+
+.arrow
+{
+    display:inline-block;
+    background-color: White;
+    height: 67px;
+}
+
+
+
+/* @group Page layout */
+
+#pageWrapper {
+ 	background-color: #C53038;
+ 	height: 2000px;
+ 	width: 100%;
+ 	top: 0px;
+ 	margin-top: 0px;
+}
+
+#middleColumn{
+	width: 960px;
+	background-color: white;
+ 	margin-left: auto;
+  	margin-right: auto;
+  	height: 100%;
+  	
+  	/* dropshadow */
+  	-moz-box-shadow: 0 0 12px #000;
+	-webkit-box-shadow: 0 0 12px #000;
+	box-shadow: 0 0 12px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+#rightColumn {
+	margin-left: 375px;
+	width: 500px;
+	height: 100%;
+	border: 1px solid white;
+	
+}
+
+#leftColumn {
+	width: 370px; 
+	height: 100%; 
+	position:fixed;
+	float: left;
+	margin-top: 250px;
+}
+
+
+/* @end */
+
+
+
+
+
+/* @header header effect */
+
+#headerBetter{
+    display: block;
+    width: 500px;
+    height: 100px;
+}
+
+#headerDifferent{
+    display: block;
+    width: 500px;
+    height: 100px;
+}
+
+#headerDemystified{
+    display: block;
+    width: 500px;
+    height: 100px;
+}
+
+#headerProven{
+    display: block;
+    width: 500px;
+    height: 100px;
+}
+
+#headerRedComma{
+    display: block;
+    width: 500px;
+    height: 100px;
+}
+
+#headerClients{
+    display: block;
+    width: 500px;
+    height: 100px;
+}
+
+
+ /* @end */
+
+
+
+
+
+h3 {
+	margin-bottom: 0px;
+	outline: none;
+}
+
+
+.header {
+	margin-bottom: -30px;
+}
+
+
+
+body { 
+	margin: 0; padding: 0; 
+}
+
+#logoBar {
+	width: 960px; 
+	height: 150px;
+	position:fixed;
+	float: left;
+	background-color: white;
+	z-index: 100;
+}
+
+#logo {
+	text-align: center;
+}
+
+#pageContent {
+	margin-top: 258px;
+	position:relative;
+}
+
+#topGradient {
+	width: 505px;
+	height: 50px; 
+	position:fixed; 
+	top: 150px;
+	margin-left: -5px;
+	background-image: url(../images/grad_top.png); 
+	background-repeat: repeat-x;
+}
+
+#bottomGradient {
+	width: 505px;
+	height: 50px; 
+	position:fixed; 
+	bottom: 30px;
+	margin-left: -5px;
+	background-image: url(../images/grad_bottom.png); 
+	background-repeat: repeat-x; 
+	z-index: 110;
+}
+
+#footerBar {
+	width: 960px; 
+	height: 30px;
+	float: left;
+	background-color: white;
+	z-index: 100;
+	position: fixed;
+	bottom: 0px;
+}
+
+#footer {
+	text-align: center;
+    font-family: "museo-sans-1","museo-sans-2", sans-serif;
+    font-size: 11px;
+    line-height: 28px;
+    color: #333333;
+}
+
+#footer a:link{
+    color: #333333;
+}
+
+#footer a:hover{
+    color: #C53038;
+}
+
+
+#largeHeadNav {
+	word-break: keep-all;
+	font-size: 80px;
+	font-family: sans-serif;
+}
+
+#largeHeadContent {
+	margin-left: -5px;
+	margin-top: 5px;
+	font-size: 80px;
+	font-family: sans-serif;
+}
+
+
+#Media {
+	text-align: right;
+}
+
+#mediaComma {
+	list-style: none;
+	list-style-type: none;
+}
+
+#privacy {
+	float: left;
+	width: 800px;
+	text-align: left;
+	margin-left: -300px;
+}
+
+#privacyPolicy {
+	float: left;
+	bottom: 7px;
+	right: 10px;
+	position: fixed;
+	z-index: 100;
+}
+
+#privacyPolicy a{
+	font-family: "museo-sans-1","museo-sans-2", sans-serif;
+	font-size: 12px;
+	color: #E65757;
+}
+

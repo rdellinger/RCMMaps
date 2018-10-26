@@ -1,0 +1,98 @@
+﻿@model RCMMaps.Models.MapDefault
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MapDefault</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CenterOnLat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CenterOnLat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CenterOnLong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CenterOnLong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZoomLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZoomLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayZoomControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayZoomControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayMapTypeControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayMapTypeControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayScaleControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayScaleControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayStreetViewControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayStreetViewControl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayPanControl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayPanControl)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

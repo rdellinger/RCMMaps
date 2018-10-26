@@ -1,0 +1,83 @@
+﻿@model RCMMaps.Models.BoardImage
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm("Edit", "BoardImages", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Board Image</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Image)
+        @Html.HiddenFor(model => model.BoardID, new { @Value = ViewBag.BoardID })
+
+
+        <div class="form-group currentImage">
+            @Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <img src="~/Images/Boards/@Html.DisplayFor(model => model.Image)" width="150" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Image"></label>
+            <div class="col-md-10">
+                <input type="file" name="file" />
+                @Html.ValidationMessage("uploadError")
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Title, new { @class = "mediumtextbox" })
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageDate, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImageDate)
+                @Html.ValidationMessageFor(model => model.ImageDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisplayOrder, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DisplayOrder)
+                @Html.ValidationMessageFor(model => model.DisplayOrder)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />&nbsp; |
+                @if (Request.QueryString["boardId"] != null)
+                {
+                    @Html.ActionLink("Cancel", "Edit", "Boards", null, null, "images", new { id = Request.QueryString["boardId"] }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("Cancel", "Edit", "Boards", null, null, "images", new { id = ViewBag.BoardID }, null)
+                }
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

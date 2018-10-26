@@ -1,0 +1,969 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RCMMapsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BoardImages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoardID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image" Type="nvarchar" MaxLength="500" />
+          <Property Name="ImageDate" Type="datetime" />
+          <Property Name="DisplayOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="BoardRatings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Boards">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoardTypeID" Type="int" />
+          <Property Name="DMAID" Type="int" />
+          <Property Name="BoardVendorID" Type="int" />
+          <Property Name="ProductionVendorID" Type="int" />
+          <Property Name="BoardNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Facing" Type="nvarchar" MaxLength="50" />
+          <Property Name="SideOfStreet" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReadDirection" Type="nvarchar" MaxLength="50" />
+          <Property Name="Illuminated" Type="bit" Nullable="false" />
+          <Property Name="BoardHeight" Type="nvarchar" MaxLength="50" />
+          <Property Name="BoardWidth" Type="nvarchar" MaxLength="50" />
+          <Property Name="Weekly18PlusImpressions" Type="int" />
+          <Property Name="TabPanelID" Type="int" />
+          <Property Name="LinkToProductionSpecs" Type="nvarchar" MaxLength="500" />
+          <Property Name="BoardRatingID" Type="int" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Tags" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BoardTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoardType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BoardVendors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vendor" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Demos">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BoardID" Type="int" />
+          <Property Name="Demo" Type="nvarchar" MaxLength="50" />
+          <Property Name="DemoWeeklyImpressions" Type="int" />
+          <Property Name="DateUpdated" Type="datetime" />
+          <Property Name="Source" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DMAs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DMA" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FeatureTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeatureType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Map_Boards">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MapID" Type="int" />
+          <Property Name="BoardID" Type="int" />
+          <Property Name="PinTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="MapDefaults">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="CenterOnLat" Type="float" />
+          <Property Name="CenterOnLong" Type="float" />
+          <Property Name="ZoomLevel" Type="int" />
+          <Property Name="DisplayZoomControl" Type="bit" Nullable="false" />
+          <Property Name="DisplayMapTypeControl" Type="bit" Nullable="false" />
+          <Property Name="DisplayScaleControl" Type="bit" Nullable="false" />
+          <Property Name="DisplayStreetViewControl" Type="bit" Nullable="false" />
+          <Property Name="DisplayPanControl" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Maps">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Width" Type="int" />
+          <Property Name="Height" Type="int" />
+          <Property Name="CenterOnLat" Type="float" />
+          <Property Name="CenterOnLong" Type="float" />
+          <Property Name="ZoomLevel" Type="int" />
+          <Property Name="DisplayZoomControl" Type="bit" Nullable="false" />
+          <Property Name="DisplayMapTypeControl" Type="bit" Nullable="false" />
+          <Property Name="DisplayScaleControl" Type="bit" Nullable="false" />
+          <Property Name="DisplayStreetViewControl" Type="bit" Nullable="false" />
+          <Property Name="DisplayPanControl" Type="bit" Nullable="false" />
+          <Property Name="Tags" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateModified" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MapStyleDefaults">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeatureTypeID" Type="int" />
+          <Property Name="Hue" Type="nvarchar" MaxLength="50" />
+          <Property Name="Saturation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lightness" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gamma" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MapStyles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MapID" Type="int" />
+          <Property Name="FeatureTypeID" Type="int" />
+          <Property Name="Hue" Type="nvarchar" MaxLength="50" />
+          <Property Name="Saturation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lightness" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gamma" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MapID" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="PinTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="PinTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProductionVendors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vendor" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="UserSearch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="MapsSearchString" Type="nvarchar" MaxLength="50" />
+          <Property Name="BoardsSearchString" Type="nvarchar" MaxLength="50" />
+          <Property Name="BoardType" Type="nvarchar" MaxLength="50" />
+          <Property Name="DMA" Type="nvarchar" MaxLength="50" />
+          <Property Name="Vendor" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="RCMMapsModelStoreContainer">
+          <EntitySet Name="BoardImages" EntityType="Self.BoardImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BoardRatings" EntityType="Self.BoardRatings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boards" EntityType="Self.Boards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BoardTypes" EntityType="Self.BoardTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BoardVendors" EntityType="Self.BoardVendors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Demos" EntityType="Self.Demos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DMAs" EntityType="Self.DMAs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeatureTypes" EntityType="Self.FeatureTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Map_Boards" EntityType="Self.Map_Boards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapDefaults" EntityType="Self.MapDefaults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maps" EntityType="Self.Maps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapStyleDefaults" EntityType="Self.MapStyleDefaults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapStyles" EntityType="Self.MapStyles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pins" EntityType="Self.Pins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PinTypes" EntityType="Self.PinTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductionVendors" EntityType="Self.ProductionVendors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSearch" EntityType="Self.UserSearch" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RCMMapsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FeatureType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeatureType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MapStyle" Relationship="RCMMapsModel.MapStyleFeatureType" FromRole="FeatureType" ToRole="MapStyle" />
+          <NavigationProperty Name="MapStyleDefaults" Relationship="RCMMapsModel.MapStyleDefaultFeatureType" FromRole="FeatureType" ToRole="MapStyleDefault" />
+        </EntityType>
+        <EntityType Name="Map">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="CenterOnLat" Type="Double" />
+          <Property Name="CenterOnLong" Type="Double" />
+          <Property Name="ZoomLevel" Type="Int32" />
+          <Property Name="DisplayZoomControl" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayMapTypeControl" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayScaleControl" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayStreetViewControl" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayPanControl" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pins" Relationship="RCMMapsModel.MapPin" FromRole="Map" ToRole="Pin" />
+          <NavigationProperty Name="MapStyles" Relationship="RCMMapsModel.MapMapStyle" FromRole="Map" ToRole="MapStyle" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Map_Boards" Relationship="RCMMapsModel.MapMap_Boards" FromRole="Map" ToRole="Map_Boards" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MapStyle">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeatureTypeID" Type="Int32" />
+          <Property Name="Hue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Saturation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lightness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gamma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MapID" Type="Int32" />
+          <NavigationProperty Name="Map" Relationship="RCMMapsModel.MapMapStyle" FromRole="MapStyle" ToRole="Map" />
+          <NavigationProperty Name="FeatureType" Relationship="RCMMapsModel.MapStyleFeatureType" FromRole="MapStyle" ToRole="FeatureType" />
+        </EntityType>
+        <EntityType Name="Pin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="PinTypeID" Type="Int32" />
+          <Property Name="MapID" Type="Int32" />
+          <NavigationProperty Name="Map" Relationship="RCMMapsModel.MapPin" FromRole="Pin" ToRole="Map" />
+          <NavigationProperty Name="PinType" Relationship="RCMMapsModel.PinPinType" FromRole="Pin" ToRole="PinType" />
+        </EntityType>
+        <EntityType Name="PinType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pin" Relationship="RCMMapsModel.PinPinType" FromRole="PinType" ToRole="Pin" />
+          <NavigationProperty Name="Map_Boards" Relationship="RCMMapsModel.Map_BoardsPinType" FromRole="PinType" ToRole="Map_Boards" />
+        </EntityType>
+        <EntityContainer Name="RCMMapsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FeatureTypes" EntityType="Self.FeatureType" />
+          <EntitySet Name="Maps" EntityType="Self.Map" />
+          <EntitySet Name="MapStyles" EntityType="Self.MapStyle" />
+          <EntitySet Name="Pins" EntityType="Self.Pin" />
+          <EntitySet Name="PinTypes" EntityType="Self.PinType" />
+          <AssociationSet Name="MapPin" Association="RCMMapsModel.MapPin">
+            <End Role="Map" EntitySet="Maps" />
+            <End Role="Pin" EntitySet="Pins" />
+          </AssociationSet>
+          <AssociationSet Name="MapMapStyle" Association="RCMMapsModel.MapMapStyle">
+            <End Role="Map" EntitySet="Maps" />
+            <End Role="MapStyle" EntitySet="MapStyles" />
+          </AssociationSet>
+          <AssociationSet Name="PinPinType" Association="RCMMapsModel.PinPinType">
+            <End Role="Pin" EntitySet="Pins" />
+            <End Role="PinType" EntitySet="PinTypes" />
+          </AssociationSet>
+          <AssociationSet Name="MapStyleFeatureType" Association="RCMMapsModel.MapStyleFeatureType">
+            <End Role="MapStyle" EntitySet="MapStyles" />
+            <End Role="FeatureType" EntitySet="FeatureTypes" />
+          </AssociationSet>
+          <EntitySet Name="BoardImages" EntityType="RCMMapsModel.BoardImage" />
+          <EntitySet Name="BoardRatings" EntityType="RCMMapsModel.BoardRating" />
+          <EntitySet Name="Boards" EntityType="RCMMapsModel.Board" />
+          <EntitySet Name="BoardTypes" EntityType="RCMMapsModel.BoardType" />
+          <EntitySet Name="Demos" EntityType="RCMMapsModel.Demo" />
+          <EntitySet Name="DMAs" EntityType="RCMMapsModel.DMA" />
+          <EntitySet Name="ProductionVendors" EntityType="RCMMapsModel.ProductionVendor" />
+          <EntitySet Name="BoardVendors" EntityType="RCMMapsModel.BoardVendor" />
+          <EntitySet Name="Map_Boards" EntityType="RCMMapsModel.Map_Boards" />
+          <AssociationSet Name="BoardBoardType" Association="RCMMapsModel.BoardBoardType">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="BoardType" EntitySet="BoardTypes" />
+          </AssociationSet>
+          <AssociationSet Name="BoardDMA" Association="RCMMapsModel.BoardDMA">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="DMA" EntitySet="DMAs" />
+          </AssociationSet>
+          <AssociationSet Name="BoardBoardVendor" Association="RCMMapsModel.BoardBoardVendor">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="BoardVendor" EntitySet="BoardVendors" />
+          </AssociationSet>
+          <AssociationSet Name="BoardProductionVendor" Association="RCMMapsModel.BoardProductionVendor">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="ProductionVendor" EntitySet="ProductionVendors" />
+          </AssociationSet>
+          <AssociationSet Name="BoardBoardImage" Association="RCMMapsModel.BoardBoardImage">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="BoardImage" EntitySet="BoardImages" />
+          </AssociationSet>
+          <AssociationSet Name="BoardDemo" Association="RCMMapsModel.BoardDemo">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="Demo" EntitySet="Demos" />
+          </AssociationSet>
+          <AssociationSet Name="BoardBoardRating" Association="RCMMapsModel.BoardBoardRating">
+            <End Role="Board" EntitySet="Boards" />
+            <End Role="BoardRating" EntitySet="BoardRatings" />
+          </AssociationSet>
+          <AssociationSet Name="Map_BoardsBoard" Association="RCMMapsModel.Map_BoardsBoard">
+            <End Role="Map_Boards" EntitySet="Map_Boards" />
+            <End Role="Board" EntitySet="Boards" />
+          </AssociationSet>
+          <AssociationSet Name="MapMap_Boards" Association="RCMMapsModel.MapMap_Boards">
+            <End Role="Map" EntitySet="Maps" />
+            <End Role="Map_Boards" EntitySet="Map_Boards" />
+          </AssociationSet>
+          <EntitySet Name="UserSearches" EntityType="RCMMapsModel.UserSearch" />
+          <EntitySet Name="MapStyleDefaults" EntityType="RCMMapsModel.MapStyleDefault" />
+          <AssociationSet Name="MapStyleDefaultFeatureType" Association="RCMMapsModel.MapStyleDefaultFeatureType">
+            <End Role="MapStyleDefault" EntitySet="MapStyleDefaults" />
+            <End Role="FeatureType" EntitySet="FeatureTypes" />
+          </AssociationSet>
+          <EntitySet Name="MapDefaults" EntityType="RCMMapsModel.MapDefault" />
+          <AssociationSet Name="Map_BoardsPinType" Association="RCMMapsModel.Map_BoardsPinType">
+            <End Role="Map_Boards" EntitySet="Map_Boards" />
+            <End Role="PinType" EntitySet="PinTypes" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="MapPin">
+          <End Type="RCMMapsModel.Map" Role="Map" Multiplicity="0..1" />
+          <End Type="RCMMapsModel.Pin" Role="Pin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Map">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pin">
+              <PropertyRef Name="MapID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MapMapStyle">
+          <End Type="RCMMapsModel.Map" Role="Map" Multiplicity="0..1" />
+          <End Type="RCMMapsModel.MapStyle" Role="MapStyle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Map">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MapStyle">
+              <PropertyRef Name="MapID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PinPinType">
+          <End Type="RCMMapsModel.Pin" Role="Pin" Multiplicity="*" />
+          <End Type="RCMMapsModel.PinType" Role="PinType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PinType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Pin">
+              <PropertyRef Name="PinTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MapStyleFeatureType">
+          <End Type="RCMMapsModel.MapStyle" Role="MapStyle" Multiplicity="*" />
+          <End Type="RCMMapsModel.FeatureType" Role="FeatureType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FeatureType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MapStyle">
+              <PropertyRef Name="FeatureTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BoardImage">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoardID" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ImageDate" Type="DateTime" Precision="3" />
+          <Property Name="DisplayOrder" Type="Int32" />
+          <NavigationProperty Name="Board" Relationship="RCMMapsModel.BoardBoardImage" FromRole="BoardImage" ToRole="Board" />
+        </EntityType>
+        <EntityType Name="BoardRating">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Boards" Relationship="RCMMapsModel.BoardBoardRating" FromRole="BoardRating" ToRole="Board" />
+        </EntityType>
+        <EntityType Name="Board">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoardTypeID" Type="Int32" />
+          <Property Name="DMAID" Type="Int32" />
+          <Property Name="ProductionVendorID" Type="Int32" />
+          <Property Name="BoardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Facing" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SideOfStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReadDirection" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Illuminated" Type="Boolean" Nullable="false" />
+          <Property Name="BoardHeight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BoardWidth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Weekly18PlusImpressions" Type="Int32" />
+          <Property Name="TabPanelID" Type="Int32" />
+          <Property Name="LinkToProductionSpecs" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BoardRatingID" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BoardVendorID" Type="Int32" />
+          <NavigationProperty Name="BoardType" Relationship="RCMMapsModel.BoardBoardType" FromRole="Board" ToRole="BoardType" />
+          <NavigationProperty Name="DMA" Relationship="RCMMapsModel.BoardDMA" FromRole="Board" ToRole="DMA" />
+          <NavigationProperty Name="BoardVendor" Relationship="RCMMapsModel.BoardBoardVendor" FromRole="Board" ToRole="BoardVendor" />
+          <NavigationProperty Name="ProductionVendor" Relationship="RCMMapsModel.BoardProductionVendor" FromRole="Board" ToRole="ProductionVendor" />
+          <NavigationProperty Name="BoardImages" Relationship="RCMMapsModel.BoardBoardImage" FromRole="Board" ToRole="BoardImage" />
+          <NavigationProperty Name="Demos" Relationship="RCMMapsModel.BoardDemo" FromRole="Board" ToRole="Demo" />
+          <NavigationProperty Name="BoardRating" Relationship="RCMMapsModel.BoardBoardRating" FromRole="Board" ToRole="BoardRating" />
+          <NavigationProperty Name="Map_Boards" Relationship="RCMMapsModel.Map_BoardsBoard" FromRole="Board" ToRole="Map_Boards" />
+        </EntityType>
+        <EntityType Name="BoardType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoardType1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Boards" Relationship="RCMMapsModel.BoardBoardType" FromRole="BoardType" ToRole="Board" />
+        </EntityType>
+        <EntityType Name="Demo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BoardID" Type="Int32" />
+          <Property Name="Demo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DemoWeeklyImpressions" Type="Int32" />
+          <Property Name="DateUpdated" Type="DateTime" Precision="3" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Board" Relationship="RCMMapsModel.BoardDemo" FromRole="Demo" ToRole="Board" />
+        </EntityType>
+        <EntityType Name="DMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DMA1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Boards" Relationship="RCMMapsModel.BoardDMA" FromRole="DMA" ToRole="Board" />
+        </EntityType>
+        <EntityType Name="ProductionVendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vendor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Boards" Relationship="RCMMapsModel.BoardProductionVendor" FromRole="ProductionVendor" ToRole="Board" />
+        </EntityType>
+        <EntityType Name="BoardVendor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vendor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Boards" Relationship="RCMMapsModel.BoardBoardVendor" FromRole="BoardVendor" ToRole="Board" />
+        </EntityType>
+        <EntityType Name="Map_Boards">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MapID" Type="Int32" />
+          <Property Name="BoardID" Type="Int32" />
+          <NavigationProperty Name="Board" Relationship="RCMMapsModel.Map_BoardsBoard" FromRole="Map_Boards" ToRole="Board" />
+          <NavigationProperty Name="Map" Relationship="RCMMapsModel.MapMap_Boards" FromRole="Map_Boards" ToRole="Map" />
+          <Property Name="PinTypeID" Type="Int32" />
+          <NavigationProperty Name="PinType" Relationship="RCMMapsModel.Map_BoardsPinType" FromRole="Map_Boards" ToRole="PinType" />
+        </EntityType>
+        <Association Name="BoardBoardType">
+          <End Type="RCMMapsModel.Board" Role="Board" Multiplicity="*" />
+          <End Type="RCMMapsModel.BoardType" Role="BoardType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BoardType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Board">
+              <PropertyRef Name="BoardTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoardDMA">
+          <End Type="RCMMapsModel.Board" Role="Board" Multiplicity="*" />
+          <End Type="RCMMapsModel.DMA" Role="DMA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Board">
+              <PropertyRef Name="DMAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoardBoardVendor">
+          <End Type="RCMMapsModel.Board" Role="Board" Multiplicity="*" />
+          <End Type="RCMMapsModel.BoardVendor" Role="BoardVendor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BoardVendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Board">
+              <PropertyRef Name="BoardVendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoardProductionVendor">
+          <End Type="RCMMapsModel.Board" Role="Board" Multiplicity="*" />
+          <End Type="RCMMapsModel.ProductionVendor" Role="ProductionVendor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ProductionVendor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Board">
+              <PropertyRef Name="ProductionVendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoardBoardImage">
+          <End Type="RCMMapsModel.Board" Role="Board" Multiplicity="0..1" />
+          <End Type="RCMMapsModel.BoardImage" Role="BoardImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Board">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BoardImage">
+              <PropertyRef Name="BoardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoardDemo">
+          <End Type="RCMMapsModel.Board" Role="Board" Multiplicity="0..1" />
+          <End Type="RCMMapsModel.Demo" Role="Demo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Board">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Demo">
+              <PropertyRef Name="BoardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BoardBoardRating">
+          <End Type="RCMMapsModel.Board" Role="Board" Multiplicity="*" />
+          <End Type="RCMMapsModel.BoardRating" Role="BoardRating" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BoardRating">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Board">
+              <PropertyRef Name="BoardRatingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Map_BoardsBoard">
+          <End Type="RCMMapsModel.Map_Boards" Role="Map_Boards" Multiplicity="*" />
+          <End Type="RCMMapsModel.Board" Role="Board" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Board">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Map_Boards">
+              <PropertyRef Name="BoardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MapMap_Boards">
+          <End Type="RCMMapsModel.Map" Role="Map" Multiplicity="0..1" />
+          <End Type="RCMMapsModel.Map_Boards" Role="Map_Boards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Map">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Map_Boards">
+              <PropertyRef Name="MapID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserSearch">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MapsSearchString" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BoardsSearchString" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BoardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vendor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MapStyleDefault">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeatureTypeID" Type="Int32" />
+          <Property Name="Hue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Saturation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lightness" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gamma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FeatureType" Relationship="RCMMapsModel.MapStyleDefaultFeatureType" FromRole="MapStyleDefault" ToRole="FeatureType" />
+        </EntityType>
+        <Association Name="MapStyleDefaultFeatureType">
+          <End Type="RCMMapsModel.MapStyleDefault" Role="MapStyleDefault" Multiplicity="*" />
+          <End Type="RCMMapsModel.FeatureType" Role="FeatureType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="FeatureType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MapStyleDefault">
+              <PropertyRef Name="FeatureTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MapDefault">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Int32" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="CenterOnLat" Type="Double" />
+          <Property Name="CenterOnLong" Type="Double" />
+          <Property Name="ZoomLevel" Type="Int32" />
+          <Property Name="DisplayZoomControl" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayMapTypeControl" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayScaleControl" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayStreetViewControl" Type="Boolean" Nullable="false" />
+          <Property Name="DisplayPanControl" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="Map_BoardsPinType">
+          <End Type="RCMMapsModel.Map_Boards" Role="Map_Boards" Multiplicity="*" />
+          <End Type="RCMMapsModel.PinType" Role="PinType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PinType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Map_Boards">
+              <PropertyRef Name="PinTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RCMMapsModelStoreContainer" CdmEntityContainer="RCMMapsEntities">
+          <EntitySetMapping Name="FeatureTypes">
+            <EntityTypeMapping TypeName="RCMMapsModel.FeatureType">
+              <MappingFragment StoreEntitySet="FeatureTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FeatureType1" ColumnName="FeatureType" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maps">
+            <EntityTypeMapping TypeName="RCMMapsModel.Map">
+              <MappingFragment StoreEntitySet="Maps">
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="CenterOnLat" ColumnName="CenterOnLat" />
+                <ScalarProperty Name="CenterOnLong" ColumnName="CenterOnLong" />
+                <ScalarProperty Name="ZoomLevel" ColumnName="ZoomLevel" />
+                <ScalarProperty Name="DisplayZoomControl" ColumnName="DisplayZoomControl" />
+                <ScalarProperty Name="DisplayMapTypeControl" ColumnName="DisplayMapTypeControl" />
+                <ScalarProperty Name="DisplayScaleControl" ColumnName="DisplayScaleControl" />
+                <ScalarProperty Name="DisplayStreetViewControl" ColumnName="DisplayStreetViewControl" />
+                <ScalarProperty Name="DisplayPanControl" ColumnName="DisplayPanControl" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapStyles">
+            <EntityTypeMapping TypeName="RCMMapsModel.MapStyle">
+              <MappingFragment StoreEntitySet="MapStyles">
+                <ScalarProperty Name="MapID" ColumnName="MapID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FeatureTypeID" ColumnName="FeatureTypeID" />
+                <ScalarProperty Name="Hue" ColumnName="Hue" />
+                <ScalarProperty Name="Saturation" ColumnName="Saturation" />
+                <ScalarProperty Name="Lightness" ColumnName="Lightness" />
+                <ScalarProperty Name="Gamma" ColumnName="Gamma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pins">
+            <EntityTypeMapping TypeName="RCMMapsModel.Pin">
+              <MappingFragment StoreEntitySet="Pins">
+                <ScalarProperty Name="MapID" ColumnName="MapID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="PinTypeID" ColumnName="PinTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PinTypes">
+            <EntityTypeMapping TypeName="RCMMapsModel.PinType">
+              <MappingFragment StoreEntitySet="PinTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BoardImages">
+            <EntityTypeMapping TypeName="RCMMapsModel.BoardImage">
+              <MappingFragment StoreEntitySet="BoardImages">
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="ImageDate" ColumnName="ImageDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="BoardID" ColumnName="BoardID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BoardRatings">
+            <EntityTypeMapping TypeName="RCMMapsModel.BoardRating">
+              <MappingFragment StoreEntitySet="BoardRatings">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boards">
+            <EntityTypeMapping TypeName="RCMMapsModel.Board">
+              <MappingFragment StoreEntitySet="Boards">
+                <ScalarProperty Name="BoardVendorID" ColumnName="BoardVendorID" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="BoardRatingID" ColumnName="BoardRatingID" />
+                <ScalarProperty Name="LinkToProductionSpecs" ColumnName="LinkToProductionSpecs" />
+                <ScalarProperty Name="TabPanelID" ColumnName="TabPanelID" />
+                <ScalarProperty Name="Weekly18PlusImpressions" ColumnName="Weekly18PlusImpressions" />
+                <ScalarProperty Name="BoardWidth" ColumnName="BoardWidth" />
+                <ScalarProperty Name="BoardHeight" ColumnName="BoardHeight" />
+                <ScalarProperty Name="Illuminated" ColumnName="Illuminated" />
+                <ScalarProperty Name="ReadDirection" ColumnName="ReadDirection" />
+                <ScalarProperty Name="SideOfStreet" ColumnName="SideOfStreet" />
+                <ScalarProperty Name="Facing" ColumnName="Facing" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BoardNumber" ColumnName="BoardNumber" />
+                <ScalarProperty Name="ProductionVendorID" ColumnName="ProductionVendorID" />
+                <ScalarProperty Name="DMAID" ColumnName="DMAID" />
+                <ScalarProperty Name="BoardTypeID" ColumnName="BoardTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BoardTypes">
+            <EntityTypeMapping TypeName="RCMMapsModel.BoardType">
+              <MappingFragment StoreEntitySet="BoardTypes">
+                <ScalarProperty Name="BoardType1" ColumnName="BoardType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demos">
+            <EntityTypeMapping TypeName="RCMMapsModel.Demo">
+              <MappingFragment StoreEntitySet="Demos">
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DemoWeeklyImpressions" ColumnName="DemoWeeklyImpressions" />
+                <ScalarProperty Name="Demo1" ColumnName="Demo" />
+                <ScalarProperty Name="BoardID" ColumnName="BoardID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DMAs">
+            <EntityTypeMapping TypeName="RCMMapsModel.DMA">
+              <MappingFragment StoreEntitySet="DMAs">
+                <ScalarProperty Name="DMA1" ColumnName="DMA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductionVendors">
+            <EntityTypeMapping TypeName="RCMMapsModel.ProductionVendor">
+              <MappingFragment StoreEntitySet="ProductionVendors">
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BoardVendors">
+            <EntityTypeMapping TypeName="RCMMapsModel.BoardVendor">
+              <MappingFragment StoreEntitySet="BoardVendors">
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Map_Boards">
+            <EntityTypeMapping TypeName="RCMMapsModel.Map_Boards">
+              <MappingFragment StoreEntitySet="Map_Boards">
+                <ScalarProperty Name="PinTypeID" ColumnName="PinTypeID" />
+                <ScalarProperty Name="BoardID" ColumnName="BoardID" />
+                <ScalarProperty Name="MapID" ColumnName="MapID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSearches">
+            <EntityTypeMapping TypeName="RCMMapsModel.UserSearch">
+              <MappingFragment StoreEntitySet="UserSearch">
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="DMA" ColumnName="DMA" />
+                <ScalarProperty Name="BoardType" ColumnName="BoardType" />
+                <ScalarProperty Name="BoardsSearchString" ColumnName="BoardsSearchString" />
+                <ScalarProperty Name="MapsSearchString" ColumnName="MapsSearchString" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapStyleDefaults">
+            <EntityTypeMapping TypeName="RCMMapsModel.MapStyleDefault">
+              <MappingFragment StoreEntitySet="MapStyleDefaults">
+                <ScalarProperty Name="Gamma" ColumnName="Gamma" />
+                <ScalarProperty Name="Lightness" ColumnName="Lightness" />
+                <ScalarProperty Name="Saturation" ColumnName="Saturation" />
+                <ScalarProperty Name="Hue" ColumnName="Hue" />
+                <ScalarProperty Name="FeatureTypeID" ColumnName="FeatureTypeID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapDefaults">
+            <EntityTypeMapping TypeName="RCMMapsModel.MapDefault">
+              <MappingFragment StoreEntitySet="MapDefaults">
+                <ScalarProperty Name="DisplayPanControl" ColumnName="DisplayPanControl" />
+                <ScalarProperty Name="DisplayStreetViewControl" ColumnName="DisplayStreetViewControl" />
+                <ScalarProperty Name="DisplayScaleControl" ColumnName="DisplayScaleControl" />
+                <ScalarProperty Name="DisplayMapTypeControl" ColumnName="DisplayMapTypeControl" />
+                <ScalarProperty Name="DisplayZoomControl" ColumnName="DisplayZoomControl" />
+                <ScalarProperty Name="ZoomLevel" ColumnName="ZoomLevel" />
+                <ScalarProperty Name="CenterOnLong" ColumnName="CenterOnLong" />
+                <ScalarProperty Name="CenterOnLat" ColumnName="CenterOnLat" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,119 @@
+﻿@model RCMMaps.Models.MapDefault
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>MapDefault</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ID)
+                @Html.ValidationMessageFor(model => model.ID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Width, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Width)
+                @Html.ValidationMessageFor(model => model.Width)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Height, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Height)
+                @Html.ValidationMessageFor(model => model.Height)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CenterOnLat, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CenterOnLat)
+                @Html.ValidationMessageFor(model => model.CenterOnLat)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CenterOnLong, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CenterOnLong)
+                @Html.ValidationMessageFor(model => model.CenterOnLong)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ZoomLevel, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ZoomLevel)
+                @Html.ValidationMessageFor(model => model.ZoomLevel)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisplayZoomControl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DisplayZoomControl)
+                @Html.ValidationMessageFor(model => model.DisplayZoomControl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisplayMapTypeControl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DisplayMapTypeControl)
+                @Html.ValidationMessageFor(model => model.DisplayMapTypeControl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisplayScaleControl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DisplayScaleControl)
+                @Html.ValidationMessageFor(model => model.DisplayScaleControl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisplayStreetViewControl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DisplayStreetViewControl)
+                @Html.ValidationMessageFor(model => model.DisplayStreetViewControl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DisplayPanControl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DisplayPanControl)
+                @Html.ValidationMessageFor(model => model.DisplayPanControl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

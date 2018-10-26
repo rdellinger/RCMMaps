@@ -1,0 +1,66 @@
+﻿@model RCMMaps.Models.UserSearch
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UserSearch</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapsSearchString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapsSearchString)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BoardsSearchString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoardsSearchString)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BoardType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoardType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

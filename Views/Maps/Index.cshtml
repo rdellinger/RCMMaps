@@ -1,0 +1,132 @@
+﻿@model IEnumerable<RCMMaps.Models.Map>
+
+@{
+    ViewBag.Title = "Maps";
+}
+
+<h2>Maps</h2>
+
+<p>
+    @*Create button creates a new record automatically, then navigates to the edit form*@
+    @using (Html.BeginForm("Create", "Maps", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        //Some default values
+        <input type="hidden" name="Title" value="(No title provided)">
+        <input type="hidden" name="Width" value="@ViewBag.DefaultWidth">
+        <input type="hidden" name="Height" value="@ViewBag.DefaultHeight">
+        <input type="hidden" name="CenterOnLat" value="@ViewBag.DefaultCenterOnLat">
+        <input type="hidden" name="CenterOnLong" value="@ViewBag.DefaultCenterOnLong">
+        <input type="hidden" name="ZoomLevel" value="@ViewBag.DefaultZoomLevel">
+        <input type="hidden" name="DisplayZoomControl" value="@ViewBag.DefaultDisplayZoomControl">
+        <input type="hidden" name="DisplayMapTypeControl" value="@ViewBag.DefaultDisplayMapTypeControl">
+        <input type="hidden" name="DisplayScaleControl" value="@ViewBag.DefaultDisplayScaleControl">
+        <input type="hidden" name="DisplayStreetViewControl" value="@ViewBag.DefaultDisplayStreetViewControl">
+        <input type="hidden" name="DisplayPanControl" value="@ViewBag.DefaultDisplayPanControl">
+
+        <input type="submit" value="Create New" class="btn btn-success btn-sm" />
+    }
+</p>
+
+
+
+@*Search fields*@
+
+<p>
+
+    @using (Html.BeginForm("Index", "Maps", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+        if (ViewBag.MapsSearchString != null)
+        {
+            <div class="form-group col-lg-6 col-md-6 col-sm-6" style="margin-top: 4px;">
+                @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "Title, description or tags", type = "text", @Value = ViewBag.MapsSearchString })
+            </div>
+        }
+
+        else
+        {
+            <div class="form-group col-lg-6 col-md-6 col-sm-6" style="margin-top: 4px;">
+                @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "Title, description or tags", type = "text" })
+            </div>
+        }
+
+
+
+        <div class="form-group col-lg-1 col-md-1 col-sm-2">
+            <button type="submit" value="Search" id="boardSearchButton" class="btn btn-default btn-sm btn-info" style="margin-top: 10px;">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </div>
+
+        @*<div class="form-group col-lg-2 col-md-2 col-sm-2" style="margin-top: 15px;">
+                @Html.ActionLink("Clear Results", "Index")
+            </div>*@
+
+    }
+
+
+    @*Only show the Clear Search Results button if there are any results*@
+
+    @using (Html.BeginForm("ClearMapsSearchString", "UserSearches"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group col-lg-1 col-md-1 col-sm-2">
+            <button type="submit" value="Clear Results" id="clearSearchButton" class="btn btn-default btn-sm" style="margin-top: 10px;">
+                <span class="glyphicon glyphicon-refresh"></span> Clear
+            </button>
+        </div>
+
+    }
+
+    <br /><br /><br />
+
+</p>
+
+
+@*If there are any results, then show them*@
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td width="100px">
+                    <a href="@Url.Action("Edit", "Maps", new { id = item.ID })" class="btn btn-info btn-xs" title="Edit">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="@Url.Action("Copy", "Maps", new { id = item.ID })" class="btn btn-success btn-xs" title="Copy">
+                        <span class="glyphicon glyphicon-file"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", "Maps", new { id = item.ID })" class="btn btn-danger btn-xs" title="Delete">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+    @*Otherwise, show the 'no records' message*@
+else
+{
+    <div style="margin: 40px 0 40px 0;">No results.</div>
+}

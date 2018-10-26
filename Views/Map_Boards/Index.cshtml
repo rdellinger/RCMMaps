@@ -1,0 +1,192 @@
+﻿@model IEnumerable<RCMMaps.Models.Board>
+
+@{
+    ViewBag.Title = "Map Boards";
+}
+
+<h2>Map Boards</h2>
+
+
+<p>
+    @Html.ActionLink("< Back to Map", "Edit", "Maps", null, null, "boards", new { id = ViewBag.MapID }, null)
+</p>
+
+@*Search fields*@
+
+<p>
+
+    @using (Html.BeginForm("Index", "Map_Boards", FormMethod.Get, new { @class = "form-inline", role = "form" }))
+    {
+        @Html.Hidden("mapId", Request.QueryString["MapID"])
+
+        if (ViewBag.BoardsSearchString != null)
+        {
+            <div class="form-group col-lg-3 col-md-3 col-sm-3" style="margin-top: 4px;">
+                @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "Board number, description or tags", type = "text", @Value = ViewBag.BoardsSearchString })
+            </div>
+        }
+
+        else
+        {
+            <div class="form-group col-lg-3 col-md-3 col-sm-3" style="margin-top: 4px;">
+                @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "Title, description or tags", type = "text" })
+            </div>
+        }
+
+        <div class="form-group col-lg-2 col-md-2 col-sm-2">
+            @Html.DropDownList("boardType", null, "All Board Types", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group col-lg-2 col-md-2 col-sm-2">
+            @Html.DropDownList("dmas", null, "All DMAs", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group col-lg-2 col-md-2 col-sm-2">
+            @Html.DropDownList("vendors", null, "All Vendors", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group col-lg-1 col-md-1 col-sm-2">
+            <button type="submit" value="Search" id="boardSearchButton" class="btn btn-default btn-sm btn-info" style="margin-top: 10px;">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </div>
+
+    }
+
+    @*Only show the Clear Search Results button if there are any results*@
+    @if (Model.Count() > 0)
+    {
+        using (Html.BeginForm("ClearBoardsSearchString", "UserSearches", new { redirectTo = "Map_Boards" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.Hidden("mapId", Request.QueryString["MapID"])
+
+            <div class="form-group col-lg-1 col-md-1 col-sm-2">
+                <button type="submit" value="Clear Results" id="clearSearchButton" class="btn btn-default btn-sm" style="margin-top: 10px;">
+                    <span class="glyphicon glyphicon-refresh"></span> Clear Results
+                </button>
+            </div>
+
+        }
+    }
+
+    <br /><br /><br />
+
+</p>
+
+
+
+
+
+@*Boards table*@
+
+@*If there are any results, then show them*@
+@if (Model.Count() > 0)
+{
+
+    <table class="table">
+        <tr>
+            <th style="width: 100px;">
+                @Html.DisplayNameFor(model => model.BoardNumber)
+            </th>
+            <th style="width: 150px;">
+                @Html.DisplayNameFor(model => model.BoardType.BoardType1)
+            </th>
+            <th style="width: 400px;">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DMA.DMA1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BoardVendor.Vendor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BoardRating.Description)
+            </th>
+            <th>
+                Add/Remove
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BoardNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BoardType.BoardType1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DMA.DMA1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BoardVendor.Vendor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BoardRating.Description)
+                </td>
+                <td width="70px" align="center">
+
+                    @{
+                        bool exitLoop = false;
+                        bool isAssigned = false;
+                        int? map_boardID = null;
+                      }
+
+                    @foreach (var map_board in ViewBag.MapBoards)
+                    {
+                        
+                        if (map_board.BoardID == item.ID)
+                        {
+                            isAssigned = true;
+                            map_boardID = map_board.ID;
+                            exitLoop = true;
+                        }
+
+                        else
+                        {
+                            isAssigned = false;
+                        }
+
+                        if (exitLoop == true)
+                        {
+                            break;
+                        }
+
+                    }
+
+                    @if (isAssigned == true)
+                    {
+                        <a href="@Url.Action("RemoveFromMap", "Map_Boards", new { id = map_boardID, redirectTo = "Map_Boards" })" class="btn btn-danger btn-xs">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </a>
+                    }
+
+                    else
+                    {
+                        <a href="@Url.Action("AddToMap", "Map_Boards", new { mapId = ViewBag.MapID, boardId = item.ID })" class="btn btn-success btn-xs">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    }
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+
+    @*Otherwise, show the 'no records' message*@
+else
+{
+    <div style="margin: 40px 0 40px 0;">No results.</div>
+}
+

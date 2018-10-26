@@ -1,0 +1,245 @@
+﻿@model RCMMaps.Models.Board
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Board</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BoardTypeID, "Board Type", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BoardTypeID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.BoardTypeID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BoardVendorID, "Board Vendor", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BoardVendorID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.BoardVendorID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DMAID, "DMA", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DMAID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.DMAID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductionVendorID, "Production Vendor", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ProductionVendorID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.ProductionVendorID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BoardNumber, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BoardNumber)
+                @Html.ValidationMessageFor(model => model.BoardNumber)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "mediumtextarea"})
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Address, new { @class = "smalltextarea" })
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.City, new { @class = "mediumtextbox" })
+                @Html.ValidationMessageFor(model => model.City)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Zip, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Zip)
+                @Html.ValidationMessageFor(model => model.Zip)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Latitude)
+                @Html.ValidationMessageFor(model => model.Latitude)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Longitude)
+                @Html.ValidationMessageFor(model => model.Longitude)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Facing, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Facing)
+                @Html.ValidationMessageFor(model => model.Facing)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SideOfStreet, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SideOfStreet)
+                @Html.ValidationMessageFor(model => model.SideOfStreet)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReadDirection, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReadDirection)
+                @Html.ValidationMessageFor(model => model.ReadDirection)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Illuminated, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Illuminated)
+                @Html.ValidationMessageFor(model => model.Illuminated)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BoardHeight, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BoardHeight)
+                @Html.ValidationMessageFor(model => model.BoardHeight)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BoardWidth, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BoardWidth)
+                @Html.ValidationMessageFor(model => model.BoardWidth)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Weekly18PlusImpressions, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Weekly18PlusImpressions)
+                @Html.ValidationMessageFor(model => model.Weekly18PlusImpressions)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TabPanelID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TabPanelID)
+                @Html.ValidationMessageFor(model => model.TabPanelID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LinkToProductionSpecs, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.LinkToProductionSpecs, new { @class = "mediumtextbox" })
+                @Html.ValidationMessageFor(model => model.LinkToProductionSpecs)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BoardRatingID, "Board Rating", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BoardRatingID", "-- Select --")
+                @Html.ValidationMessageFor(model => model.BoardRatingID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Notes, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Notes, new { @class = "mediumtextarea" })
+                @Html.ValidationMessageFor(model => model.Notes)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Tags, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Tags, new { @class = "smalltextarea" })
+                @Html.ValidationMessageFor(model => model.Tags)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateCreated, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.DateCreated)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedBy, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.CreatedBy)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateModified, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.DateModified)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ModifiedBy, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.ModifiedBy)
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />&nbsp;|&nbsp;@Html.ActionLink("Cancel", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

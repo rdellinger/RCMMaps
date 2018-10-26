@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b0e002b77d841dfa832c42aed2df7c9" Name="Diagram1" ZoomLevel="112">
+        <EntityTypeShape EntityType="RCMMapsModel.FeatureType" Width="1.5" PointX="4.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCMMapsModel.Map" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCMMapsModel.MapStyle" Width="1.5" PointX="2.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCMMapsModel.Pin" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RCMMapsModel.PinType" Width="1.5" PointX="4.75" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="RCMMapsModel.MapPin" />
+        <AssociationConnector Association="RCMMapsModel.MapMapStyle" />
+        <AssociationConnector Association="RCMMapsModel.PinPinType" />
+        <AssociationConnector Association="RCMMapsModel.MapStyleFeatureType" />
+        <EntityTypeShape EntityType="RCMMapsModel.BoardImage" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RCMMapsModel.BoardRating" Width="1.5" PointX="4.75" PointY="12" />
+        <EntityTypeShape EntityType="RCMMapsModel.Board" Width="1.5" PointX="0.5" PointY="6.75" />
+        <EntityTypeShape EntityType="RCMMapsModel.BoardType" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="RCMMapsModel.Demo" Width="1.5" PointX="4.75" PointY="9.375" />
+        <EntityTypeShape EntityType="RCMMapsModel.DMA" Width="1.5" PointX="2.75" PointY="8.625" />
+        <EntityTypeShape EntityType="RCMMapsModel.ProductionVendor" Width="1.5" PointX="2.75" PointY="12.375" />
+        <EntityTypeShape EntityType="RCMMapsModel.BoardVendor" Width="1.5" PointX="2.75" PointY="10.5" />
+        <EntityTypeShape EntityType="RCMMapsModel.Map_Boards" Width="1.5" PointX="8.375" PointY="4.125" />
+        <AssociationConnector Association="RCMMapsModel.BoardBoardType" />
+        <AssociationConnector Association="RCMMapsModel.BoardDMA" />
+        <AssociationConnector Association="RCMMapsModel.BoardBoardVendor" />
+        <AssociationConnector Association="RCMMapsModel.BoardProductionVendor" />
+        <AssociationConnector Association="RCMMapsModel.BoardBoardImage" />
+        <AssociationConnector Association="RCMMapsModel.BoardDemo" />
+        <AssociationConnector Association="RCMMapsModel.BoardBoardRating" />
+        <AssociationConnector Association="RCMMapsModel.Map_BoardsBoard" />
+        <AssociationConnector Association="RCMMapsModel.MapMap_Boards" />
+        <EntityTypeShape EntityType="RCMMapsModel.UserSearch" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="RCMMapsModel.MapStyleDefault" Width="1.5" PointX="9.375" PointY="0.5" />
+        <AssociationConnector Association="RCMMapsModel.MapStyleDefaultFeatureType" />
+        <EntityTypeShape EntityType="RCMMapsModel.MapDefault" Width="1.5" PointX="7.25" PointY="0.5" />
+        <AssociationConnector Association="RCMMapsModel.Map_BoardsPinType" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
